@@ -1,0 +1,1680 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="AutoDock Vina Moleküler Docking - Modern ve Hızlı Docking Rehberi">
+    <title>AutoDock Vina Moleküler Docking Rehberi</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Inter:wght@400;600;700&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <span class="logo">Vina</span>
+                <span class="brand-text">AutoDock Vina Rehberi</span>
+            </div>
+            <button class="menu-toggle" id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#giris" class="nav-link">Giriş</a></li>
+                <li><a href="#kurulum" class="nav-link">Kurulum</a></li>
+                <li><a href="#protein" class="nav-link">Protein</a></li>
+                <li><a href="#ligand" class="nav-link">Ligand</a></li>
+                <li><a href="#config" class="nav-link">Config</a></li>
+                <li><a href="#calistirma" class="nav-link">Çalıştırma</a></li>
+                <li><a href="#analiz" class="nav-link">Analiz</a></li>
+                <li><a href="#otomasyon" class="nav-link">Otomasyon</a></li>
+                <li><a href="#best-practices" class="nav-link">Best Practices</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header id="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">AutoDock Vina<br><span class="subtitle">Modern Moleküler Docking</span></h1>
+                <p class="hero-description">Hızlı, güçlü ve kullanımı kolay - Yeni nesil docking protokolü</p>
+                <div class="hero-meta">
+                    <span class="badge">⚡ 2-3× Daha Hızlı</span>
+                    <span class="badge">🎯 Daha Basit Kullanım</span>
+                    <span class="badge">🔬 Yüksek Hassasiyet</span>
+                    <span class="badge">🐍 Python Entegrasyonu</span>
+                </div>
+            </div>
+        </div>
+        <div class="hero-bg"></div>
+    </header>
+
+    <main class="main-content">
+        <div class="container">
+            <!-- Giriş -->
+            <section id="giris" class="section">
+                <div class="section-header">
+                    <span class="section-number">01</span>
+                    <h2>AutoDock Vina Nedir?</h2>
+                </div>
+                <div class="content-block">
+                    <p class="lead">AutoDock Vina, protein-ligand molecular docking için geliştirilmiş modern, hızlı ve kullanıcı dostu bir yazılımdır. AutoDock 4'ün yeni nesil versiyonu olarak, önemli performans iyileştirmeleri ve basitleştirilmiş workflow sunar.</p>
+                    
+                    <div class="comparison-grid">
+                        <div class="comparison-card vina">
+                            <h3>✨ AutoDock Vina</h3>
+                            <ul class="check-list">
+                                <li>2-3× daha hızlı hesaplama</li>
+                                <li>Çok çekirdekli CPU desteği</li>
+                                <li>Basit parametre yapısı</li>
+                                <li>Tek komut ile çalıştırma</li>
+                                <li>Daha iyi scoring function</li>
+                                <li>Python entegrasyonu</li>
+                                <li>Modern arama algoritması</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="comparison-card ad4">
+                            <h3>📚 AutoDock 4</h3>
+                            <ul class="check-list">
+                                <li>Daha yavaş (tek çekirdek)</li>
+                                <li>Karmaşık parametre sistemi</li>
+                                <li>İki aşamalı çalıştırma</li>
+                                <li>Manuel grid setup</li>
+                                <li>Eski scoring function</li>
+                                <li>GA/LGA algoritması</li>
+                                <li>Daha detaylı kontrol</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="info-box info">
+                        <h4>📊 Performans Karşılaştırması</h4>
+                        <p>Aynı sistem üzerinde yapılan testlerde:</p>
+                        <ul>
+                            <li><strong>AutoDock 4:</strong> 50 run × 2.5M evaluations ≈ 45-60 dakika</li>
+                            <li><strong>AutoDock Vina:</strong> Exhaustiveness 8, 8 CPU core ≈ 5-10 dakika</li>
+                        </ul>
+                        <p>Vina, <strong>5-10× daha hızlı</strong> sonuç verir ve genellikle daha iyi tahminler yapar.</p>
+                    </div>
+
+                    <h3>Vina'yı Ne Zaman Kullanmalı?</h3>
+                    <div class="grid-2">
+                        <div class="info-box success">
+                            <h4>✅ Vina İdeal:</h4>
+                            <ul>
+                                <li>Standart protein-ligand docking</li>
+                                <li>Virtual screening (büyük kütüphaneler)</li>
+                                <li>Hızlı sonuç gerekiyor</li>
+                                <li>Python scriptleri ile otomasyon</li>
+                                <li>Modern hesaplama kaynakları</li>
+                                <li>Basit, hızlı workflow</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="info-box warning">
+                            <h4>⚠️ AutoDock 4 Tercih Edilir:</h4>
+                            <ul>
+                                <li>Flexible protein docking</li>
+                                <li>Kovalent docking</li>
+                                <li>Metalloprotein kompleksleri</li>
+                                <li>Çok spesifik parametre kontrolü</li>
+                                <li>Eski protokol replikasyonu</li>
+                                <li>Scoring function detayları kritik</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <h3>Temel Workflow</h3>
+                    <div class="workflow-simple">
+                        <div class="flow-step">
+                            <div class="step-icon">1️⃣</div>
+                            <h4>Protein Hazırlama</h4>
+                            <p>PDB → PDBQT (polar H, yükler)</p>
+                        </div>
+                        <div class="flow-arrow">→</div>
+                        <div class="flow-step">
+                            <div class="step-icon">2️⃣</div>
+                            <h4>Ligand Hazırlama</h4>
+                            <p>SDF/MOL2 → PDBQT</p>
+                        </div>
+                        <div class="flow-arrow">→</div>
+                        <div class="flow-step">
+                            <div class="step-icon">3️⃣</div>
+                            <h4>Config Dosyası</h4>
+                            <p>Grid box koordinatları</p>
+                        </div>
+                        <div class="flow-arrow">→</div>
+                        <div class="flow-step">
+                            <div class="step-icon">4️⃣</div>
+                            <h4>Docking</h4>
+                            <p>Tek komut!</p>
+                        </div>
+                        <div class="flow-arrow">→</div>
+                        <div class="flow-step">
+                            <div class="step-icon">5️⃣</div>
+                            <h4>Analiz</h4>
+                            <p>Sonuçları görselleştir</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Kurulum -->
+            <section id="kurulum" class="section">
+                <div class="section-header">
+                    <span class="section-number">02</span>
+                    <h2>Kurulum</h2>
+                </div>
+                <div class="content-block">
+                    <p class="lead">AutoDock Vina kurulumu oldukça basittir. Birkaç farklı yöntemle kurabilirsiniz.</p>
+                    
+                    <h3>2.1. İndirme & Kurulum</h3>
+                    
+                    <div class="install-tabs">
+                        <div class="install-option">
+                            <h4>🐧 Linux</h4>
+                            <pre><code class="language-bash"># İndirme
+wget https://github.com/ccsb-scripps/AutoDock-Vina/releases/download/v1.2.5/vina_1.2.5_linux_x86_64
+chmod +x vina_1.2.5_linux_x86_64
+sudo mv vina_1.2.5_linux_x86_64 /usr/local/bin/vina
+
+# Test
+vina --version</code></pre>
+                        </div>
+                        
+                        <div class="install-option">
+                            <h4>🪟 Windows</h4>
+                            <pre><code class="language-powershell"># 1. İndir: https://github.com/ccsb-scripps/AutoDock-Vina/releases
+# 2. vina_1.2.5_windows_x86_64.exe dosyasını indir
+# 3. C:\Program Files\Vina\ klasörüne kopyala
+# 4. PATH'e ekle (Ortam Değişkenleri)
+
+# Test (Command Prompt)
+vina --version</code></pre>
+                        </div>
+                        
+                        <div class="install-option">
+                            <h4>🍎 macOS</h4>
+                            <pre><code class="language-bash"># Homebrew ile
+brew install autodock-vina
+
+# Veya manuel
+wget https://github.com/ccsb-scripps/AutoDock-Vina/releases/download/v1.2.5/vina_1.2.5_macos_x86_64
+chmod +x vina_1.2.5_macos_x86_64
+sudo mv vina_1.2.5_macos_x86_64 /usr/local/bin/vina
+
+# Test
+vina --version</code></pre>
+                        </div>
+                        
+                        <div class="install-option">
+                            <h4>🐍 Conda/Pip (Önerilir)</h4>
+                            <pre><code class="language-bash"># Conda ile
+conda install -c conda-forge vina
+
+# Veya pip ile
+pip install vina
+
+# Python'dan kullanım
+from vina import Vina
+v = Vina(sf_name='vina')</code></pre>
+                        </div>
+                    </div>
+
+                    <h3>2.2. MGLTools Kurulumu</h3>
+                    <p>PDBQT dönüşümü için MGLTools veya alternatif araçlar gerekir.</p>
+                    
+                    <div class="tool-grid">
+                        <div class="tool-card">
+                            <h4>MGLTools (Klasik)</h4>
+                            <p>AutoDock suite araçları</p>
+                            <a href="https://ccsb.scripps.edu/mgltools/downloads/" target="_blank" class="btn-link">İndir →</a>
+                            <pre><code class="language-bash"># Linux/Mac kurulum sonrası
+export PATH=$PATH:/path/to/mgltools/bin
+prepare_receptor4.py --help</code></pre>
+                        </div>
+                        
+                        <div class="tool-card recommended">
+                            <h4>Open Babel (Modern)</h4>
+                            <p>Format dönüşümü için</p>
+                            <a href="http://openbabel.org/" target="_blank" class="btn-link">İndir →</a>
+                            <pre><code class="language-bash"># Conda ile
+conda install -c conda-forge openbabel
+
+# Test
+obabel --version</code></pre>
+                        </div>
+                        
+                        <div class="tool-card">
+                            <h4>Meeko (Yeni)</h4>
+                            <p>Python-based PDBQT araçları</p>
+                            <a href="https://github.com/forlilab/Meeko" target="_blank" class="btn-link">GitHub →</a>
+                            <pre><code class="language-bash"># Pip ile
+pip install meeko
+
+# Kullanım
+mk_prepare_ligand.py -i ligand.sdf -o ligand.pdbqt</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="info-box success">
+                        <h4>✅ Önerilen Stack</h4>
+                        <pre><code class="language-bash"># Hepsi bir arada kurulum (Conda)
+conda create -n vina-env python=3.9
+conda activate vina-env
+conda install -c conda-forge vina openbabel pymol-open-source
+pip install meeko
+
+# Test
+vina --version
+obabel --version
+pymol -c</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Protein Hazırlama -->
+            <section id="protein" class="section">
+                <div class="section-header">
+                    <span class="section-number">03</span>
+                    <h2>Protein Hazırlama</h2>
+                </div>
+                <div class="content-block">
+                    <p class="lead">Vina için protein hazırlama, AutoDock 4'e benzer ancak daha az karmaşıktır.</p>
+                    
+                    <h3>3.1. PDB Dosyası Temizleme</h3>
+                    
+                    <div class="step-box">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h4>Su Moleküllerini Kaldır</h4>
+                            <pre><code class="language-bash"># PyMOL ile
+pymol protein.pdb
+# PyMOL konsolunda:
+remove solvent
+save protein_clean.pdb</code></pre>
+                            <p>Veya komut satırı:</p>
+                            <pre><code class="language-bash">grep -v "HOH" protein.pdb > protein_clean.pdb</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="step-box">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h4>Heteroatomları İncele</h4>
+                            <p>Ko-kristalize ligand, kofaktörler, metal iyonları:</p>
+                            <pre><code class="language-python"># PyMOL'de
+select ligand, organic
+select metals, metal
+select cofactors, resn NAD+NADP+FAD+FMN+HEM
+
+# Ligandı çıkar (blind docking için)
+remove ligand
+save protein_apo.pdb</code></pre>
+                        </div>
+                    </div>
+
+                    <h3>3.2. PDBQT Dönüşümü</h3>
+                    <p>Üç farklı yöntem:</p>
+                    
+                    <div class="tabs-container">
+                        <div class="method-tabs">
+                            <button class="tab-btn active" onclick="switchMethod(event, 'method-mgl')">MGLTools</button>
+                            <button class="tab-btn" onclick="switchMethod(event, 'method-meeko')">Meeko</button>
+                            <button class="tab-btn" onclick="switchMethod(event, 'method-pymol')">PyMOL Plugin</button>
+                        </div>
+                        
+                        <div id="method-mgl" class="method-content active">
+                            <h4>Yöntem 1: MGLTools (prepare_receptor4.py)</h4>
+                            <pre><code class="language-bash"># Temel kullanım
+prepare_receptor4.py -r protein.pdb -o protein.pdbqt
+
+# Gelişmiş: su koru, pH ayarla
+prepare_receptor4.py -r protein.pdb -o protein.pdbqt \
+    -A checkhydrogens \
+    -U nphs_lps_waters
+
+# Parametreler:
+# -A: alternatif lokasyonlar için
+# -U: polar H'ler, lone pairs, sular
+# -e: amino aside ekle
+# -C: yükleri ata</code></pre>
+                            <div class="info-box info">
+                                <p><strong>Not:</strong> prepare_receptor4.py otomatik olarak:</p>
+                                <ul>
+                                    <li>Polar H ekler</li>
+                                    <li>Gasteiger yükleri atar</li>
+                                    <li>PDBQT formatına dönüştürür</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div id="method-meeko" class="method-content">
+                            <h4>Yöntem 2: Meeko (Modern, Önerilir)</h4>
+                            <pre><code class="language-bash"># Receptor hazırlama
+mk_prepare_receptor.py -i protein.pdb -o protein.pdbqt
+
+# Gelişmiş seçenekler
+mk_prepare_receptor.py \
+    -i protein.pdb \
+    -o protein.pdbqt \
+    --pH 7.4 \
+    --remove_nonstd_residues \
+    --keep_nonpolar_hydrogens
+
+# Flexible residues ile (ileri düzey)
+mk_prepare_receptor.py \
+    -i protein.pdb \
+    -o protein.pdbqt \
+    --flexible_residues "TYR128 SER190"</code></pre>
+                        </div>
+                        
+                        <div id="method-pymol" class="method-content">
+                            <h4>Yöntem 3: PyMOL AutoDock Plugin</h4>
+                            <pre><code class="language-python"># PyMOL'de
+load protein.pdb
+# Plugin → AutoDock → Protein → Set → Choose
+# "Add Hydrogens" → "OK"
+# "Assign Charges" → "Gasteiger"
+# "Save" → protein.pdbqt</code></pre>
+                            <p>Veya PyMOL script:</p>
+                            <pre><code class="language-python">from pymol import cmd
+cmd.load("protein.pdb")
+cmd.h_add(selection="polymer")
+cmd.save("protein.pdbqt")</code></pre>
+                        </div>
+                    </div>
+
+                    <h3>3.3. Protonasyon Durumu Optimizasyonu</h3>
+                    <p>Histidin ve titratable amino asitler için:</p>
+                    
+                    <pre><code class="language-bash"># PROPKA ile pKa tahmin
+propka31 protein.pdb
+
+# H++ web servis (önerilir)
+# http://biophysics.cs.vt.edu/H++
+# - PDB dosyasını yükle
+# - pH 7.4 seç
+# - Protonlanmış yapıyı indir
+
+# PDB2PQR
+pdb2pqr --ff=AMBER --ph=7.4 protein.pdb protein.pqr</code></pre>
+
+                    <div class="checklist-box">
+                        <h4>✓ Protein Hazırlık Kontrol Listesi:</h4>
+                        <ul class="checklist">
+                            <li>Su molekülleri kaldırıldı (kritik olanlar hariç)</li>
+                            <li>Ko-kristalize ligand çıkarıldı</li>
+                            <li>Alternatif konformasyonlar çözüldü</li>
+                            <li>Polar hidrojenlerin eklendi</li>
+                            <li>Gasteiger yükleri atandı</li>
+                            <li>PDBQT formatına dönüştürüldü</li>
+                            <li>Dosya boyutu makul (<10 MB)</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Ligand Hazırlama -->
+            <section id="ligand" class="section">
+                <div class="section-header">
+                    <span class="section-number">04</span>
+                    <h2>Ligand Hazırlama</h2>
+                </div>
+                <div class="content-block">
+                    <p class="lead">Ligand hazırlama, 3D yapı oluşturma, enerji minimizasyonu ve PDBQT formatına dönüşümü içerir.</p>
+                    
+                    <h3>4.1. 3D Yapı Oluşturma</h3>
+                    
+                    <div class="grid-2">
+                        <div>
+                            <h4>SMILES'den Başlama</h4>
+                            <pre><code class="language-bash"># Open Babel ile
+echo "CCO" > ethanol.smi
+obabel ethanol.smi -O ethanol.sdf --gen3d
+
+# Minimizasyon ekle
+obabel ethanol.smi -O ethanol.sdf \
+    --gen3d \
+    --minimize \
+    --ff MMFF94 \
+    --steps 500</code></pre>
+                        </div>
+                        
+                        <div>
+                            <h4>PubChem/ZINC'den İndirme</h4>
+                            <pre><code class="language-bash"># PubChem CID ile
+# https://pubchem.ncbi.nlm.nih.gov/
+# Format: SDF-3D indir
+
+# ZINC veritabanı
+# https://zinc15.docking.org/
+# 3D format indir</code></pre>
+                        </div>
+                    </div>
+
+                    <h3>4.2. Enerji Minimizasyonu</h3>
+                    <p>Yapısal strain'i kaldırmak için:</p>
+                    
+                    <pre><code class="language-bash"># Open Babel - MMFF94
+obabel ligand.sdf -O ligand_min.sdf \
+    --minimize \
+    --ff MMFF94 \
+    --steps 500 \
+    --sd  # steepest descent
+
+# UFF force field (hızlı)
+obabel ligand.sdf -O ligand_min.sdf \
+    --minimize \
+    --ff UFF \
+    --steps 200</code></pre>
+
+                    <h3>4.3. pH'ya Göre Protonlama</h3>
+                    <pre><code class="language-bash"># Open Babel ile pH 7.4
+obabel ligand.sdf -O ligand_pH74.sdf -p 7.4
+
+# Alternatif: ChemAxon Marvin
+# GUI: Sketch → Calculate → Protonation → pH 7.4</code></pre>
+
+                    <h3>4.4. PDBQT Dönüşümü</h3>
+                    
+                    <div class="tabs-container">
+                        <div class="method-tabs">
+                            <button class="tab-btn active" onclick="switchLigandMethod(event, 'ligand-meeko')">Meeko (Önerilir)</button>
+                            <button class="tab-btn" onclick="switchLigandMethod(event, 'ligand-mgl')">MGLTools</button>
+                            <button class="tab-btn" onclick="switchLigandMethod(event, 'ligand-obabel')">Open Babel</button>
+                        </div>
+                        
+                        <div id="ligand-meeko" class="method-content active">
+                            <h4>Meeko - Modern ve Güvenilir</h4>
+                            <pre><code class="language-bash"># Temel kullanım
+mk_prepare_ligand.py -i ligand.sdf -o ligand.pdbqt
+
+# Gelişmiş: torsions, pH
+mk_prepare_ligand.py \
+    -i ligand.mol2 \
+    -o ligand.pdbqt \
+    --pH 7.4 \
+    --merge_these_atom_types \
+    --rigid_macrocycles
+
+# Batch processing
+for file in ligands/*.sdf; do
+    mk_prepare_ligand.py -i "$file" -o "${file%.sdf}.pdbqt"
+done</code></pre>
+                            <div class="info-box success">
+                                <p><strong>Avantajlar:</strong></p>
+                                <ul>
+                                    <li>En güncel PDBQT format desteği</li>
+                                    <li>Doğru torsion tree</li>
+                                    <li>Macrocycle desteği</li>
+                                    <li>Python entegrasyonu</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div id="ligand-mgl" class="method-content">
+                            <h4>MGLTools - Klasik Yöntem</h4>
+                            <pre><code class="language-bash"># prepare_ligand4.py
+prepare_ligand4.py -l ligand.mol2 -o ligand.pdbqt
+
+# Torsions ayarlama
+prepare_ligand4.py \
+    -l ligand.mol2 \
+    -o ligand.pdbqt \
+    -A bonds_hydrogens \
+    -U nphs_lps
+
+# Parametreler:
+# -A: aromatics, bonds, hydrogens
+# -U: polar hydrogens, lone pairs
+# -C: yükleri sakla
+# -Z: torsions sınırla</code></pre>
+                        </div>
+                        
+                        <div id="ligand-obabel" class="method-content">
+                            <h4>Open Babel - Hızlı Dönüşüm</h4>
+                            <pre><code class="language-bash"># Direkt dönüşüm (temel)
+obabel ligand.sdf -O ligand.pdbqt
+
+# Hidrojen ve yük ekle
+obabel ligand.sdf -O ligand.pdbqt -h --partialcharge gasteiger
+
+# Batch
+obabel *.sdf -O output.pdbqt -m</code></pre>
+                            <div class="info-box warning">
+                                <p><strong>Dikkat:</strong> Open Babel'in PDBQT çıktısı bazı durumlarda Meeko/MGLTools'tan farklı olabilir. Kritik çalışmalarda Meeko tercih edilir.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h3>4.5. Rotatable Bonds Kontrolü</h3>
+                    <pre><code class="language-python"># Python ile kontrol
+from rdkit import Chem
+from rdkit.Chem import Descriptors
+
+mol = Chem.MolFromMolFile('ligand.sdf')
+n_rotatable = Descriptors.NumRotatableBonds(mol)
+print(f"Rotatable bonds: {n_rotatable}")
+
+# PDBQT'den kontrol
+grep "^REMARK.*active torsions" ligand.pdbqt</code></pre>
+
+                    <div class="info-box info">
+                        <h4>📊 Rotatable Bond Önerileri</h4>
+                        <table>
+                            <tr>
+                                <th>Torsiyon Sayısı</th>
+                                <th>Durum</th>
+                                <th>Öneri</th>
+                            </tr>
+                            <tr>
+                                <td>0-7</td>
+                                <td>✅ İdeal</td>
+                                <td>Hızlı ve güvenilir docking</td>
+                            </tr>
+                            <tr>
+                                <td>8-12</td>
+                                <td>⚠️ Orta</td>
+                                <td>Exhaustiveness artır (16-24)</td>
+                            </tr>
+                            <tr>
+                                <td>>12</td>
+                                <td>❌ Yüksek</td>
+                                <td>Ligandı parçala veya constrain</td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <h3>4.6. Kalite Kontrolü</h3>
+                    <div class="checklist-box">
+                        <h4>✓ Ligand Kontrol Listesi:</h4>
+                        <ul class="checklist">
+                            <li>3D koordinatlar mevcut</li>
+                            <li>Enerji minimize edildi</li>
+                            <li>Hedef pH'da protonlanmış</li>
+                            <li>Tüm hidrojenlerin mevcut</li>
+                            <li>Gasteiger yükleri atandı</li>
+                            <li>Rotatable bonds ≤ 12</li>
+                            <li>Moleküler ağırlık < 900 Da</li>
+                            <li>PDBQT dosyası hatasız</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Config Dosyası -->
+            <section id="config" class="section">
+                <div class="section-header">
+                    <span class="section-number">05</span>
+                    <h2>Config Dosyası Oluşturma</h2>
+                </div>
+                <div class="content-block">
+                    <p class="lead">Vina'nın en büyük avantajlarından biri: basit config dosyası! Sadece grid box koordinatları ve boyutu.</p>
+                    
+                    <h3>5.1. Temel Config Yapısı</h3>
+                    
+                    <div class="code-example">
+                        <h4>config.txt - Minimal Örnek</h4>
+                        <pre><code class="language-text">receptor = protein.pdbqt
+ligand = ligand.pdbqt
+
+center_x = 15.190
+center_y = 53.903
+center_z = 16.917
+
+size_x = 20
+size_y = 20
+size_z = 20
+
+exhaustiveness = 8</code></pre>
+                    </div>
+
+                    <p>Bu kadar! AutoDock 4'teki gibi karmaşık GPF/DPF dosyaları yok.</p>
+
+                    <h3>5.2. Grid Box Merkezi Belirleme</h3>
+                    
+                    <h4>Yöntem 1: PyMOL ile (Görsel)</h4>
+                    <pre><code class="language-python"># PyMOL'de
+load protein.pdb
+load ligand.sdf  # Ko-kristalize ligand
+
+# Ligand merkezini al
+center_of_mass ligand
+
+# Konsol çıktısı:
+# Center of Mass: [15.19, 53.90, 16.92]</code></pre>
+
+                    <h4>Yöntem 2: Python Script</h4>
+                    <pre><code class="language-python">from Bio.PDB import PDBParser
+import numpy as np
+
+# PDB dosyasından belirli kalıntıları seç
+parser = PDBParser()
+structure = parser.get_structure('protein', 'protein.pdb')
+
+# Aktif bölge kalıntıları (örnek: 50-60)
+coords = []
+for residue in structure[0]['A'][50:61]:
+    for atom in residue:
+        coords.append(atom.get_coord())
+
+# Merkez hesapla
+center = np.mean(coords, axis=0)
+print(f"center_x = {center[0]:.3f}")
+print(f"center_y = {center[1]:.3f}")
+print(f"center_z = {center[2]:.3f}")</code></pre>
+
+                    <h4>Yöntem 3: AutoDock Tools</h4>
+                    <pre><code class="language-bash"># MGLTools GUI
+pythonsh $MGLTOOLS/bin/AutoDockTools
+# Grid → Grid Box
+# Ligandı yükle
+# "Center on ligand" tıkla
+# Koordinatları kaydet</code></pre>
+
+                    <h3>5.3. Grid Box Boyutu</h3>
+                    
+                    <div class="info-box info">
+                        <h4>📏 Boyut Hesaplama Kuralları</h4>
+                        <p><strong>Genel Kural:</strong> Ligandın en uzun boyutu + 15-20 Å</p>
+                        <ul>
+                            <li><strong>Küçük moleküller</strong> (MW < 300): 20×20×20 Å</li>
+                            <li><strong>İlaç benzeri</strong> (MW 300-500): 22×22×22 Å</li>
+                            <li><strong>Büyük ligandlar</strong> (MW > 500): 25×25×25 Å</li>
+                            <li><strong>Blind docking:</strong> 30×30×30 Å veya daha büyük</li>
+                        </ul>
+                    </div>
+
+                    <pre><code class="language-python"># Ligand boyutunu hesapla
+from rdkit import Chem
+from rdkit.Chem import AllChem
+
+mol = Chem.MolFromPDBFile('ligand.pdb')
+conf = mol.GetConformer()
+positions = conf.GetPositions()
+
+# Min/max koordinatlar
+min_coords = positions.min(axis=0)
+max_coords = positions.max(axis=0)
+dimensions = max_coords - min_coords
+
+# Önerilen box boyutu (her yöne +10 Å)
+recommended_size = dimensions + 20
+print(f"Önerilen box: {recommended_size}")</code></pre>
+
+                    <h3>5.4. Gelişmiş Parametreler</h3>
+                    
+                    <div class="code-example">
+                        <h4>config.txt - Tüm Parametreler</h4>
+                        <pre><code class="language-text">receptor = protein.pdbqt
+ligand = ligand.pdbqt
+
+center_x = 15.190
+center_y = 53.903
+center_z = 16.917
+
+size_x = 22
+size_y = 22
+size_z = 22
+
+# Arama parametreleri
+exhaustiveness = 8      # Varsayılan: 8 (8-32 arası)
+num_modes = 9           # Kaç pose döndürülsün (varsayılan: 9)
+energy_range = 3        # kcal/mol (varsayılan: 3)
+
+# CPU kullanımı
+cpu = 4                 # Core sayısı (varsayılan: tümü)
+
+# Random seed (tekrarlanabilirlik için)
+seed = 12345
+
+# Çıktı dosyası
+out = docking_result.pdbqt
+log = docking_log.txt</code></pre>
+                    </div>
+
+                    <div class="param-grid">
+                        <div class="param-card">
+                            <h5>exhaustiveness</h5>
+                            <p class="param-desc">Arama kapsamlılığı. Yüksek = daha hassas ama daha yavaş.</p>
+                            <ul>
+                                <li>8: Standart (hızlı)</li>
+                                <li>16: İyi hassasiyet</li>
+                                <li>32: Maksimum hassasiyet</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="param-card">
+                            <h5>num_modes</h5>
+                            <p class="param-desc">Döndürülecek binding mode sayısı.</p>
+                            <ul>
+                                <li>9: Varsayılan</li>
+                                <li>20: Daha fazla alternatif</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="param-card">
+                            <h5>energy_range</h5>
+                            <p class="param-desc">En düşük enerjiden kaç kcal/mol'e kadar.</p>
+                            <ul>
+                                <li>3: Varsayılan</li>
+                                <li>5: Daha geniş aralık</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <h3>5.5. Otomatik Config Oluşturma</h3>
+                    <pre><code class="language-python">#!/usr/bin/env python3
+"""AutoDock Vina config dosyası oluşturucu"""
+
+def create_config(receptor, ligand, center, size, output="config.txt"):
+    config = f"""receptor = {receptor}
+ligand = {ligand}
+
+center_x = {center[0]:.3f}
+center_y = {center[1]:.3f}
+center_z = {center[2]:.3f}
+
+size_x = {size[0]}
+size_y = {size[1]}
+size_z = {size[2]}
+
+exhaustiveness = 8
+num_modes = 9
+"""
+    
+    with open(output, 'w') as f:
+        f.write(config)
+    print(f"Config dosyası oluşturuldu: {output}")
+
+# Kullanım
+create_config(
+    receptor="protein.pdbqt",
+    ligand="ligand.pdbqt",
+    center=[15.19, 53.90, 16.92],
+    size=[22, 22, 22]
+)</code></pre>
+                </div>
+            </section>
+
+            <!-- Çalıştırma -->
+            <section id="calistirma" class="section">
+                <div class="section-header">
+                    <span class="section-number">06</span>
+                    <h2>Docking Çalıştırma</h2>
+                </div>
+                <div class="content-block">
+                    <p class="lead">Vina'nın en güzel yanı: tek komutla çalıştırma! 🚀</p>
+                    
+                    <h3>6.1. Temel Kullanım</h3>
+                    
+                    <div class="terminal-box">
+                        <h4>Komut Satırı</h4>
+                        <pre><code class="language-bash"># Config dosyası ile
+vina --config config.txt
+
+# Veya parametreleri direkt ver
+vina --receptor protein.pdbqt \
+     --ligand ligand.pdbqt \
+     --center_x 15.19 --center_y 53.90 --center_z 16.92 \
+     --size_x 22 --size_y 22 --size_z 22 \
+     --exhaustiveness 8 \
+     --out docking_result.pdbqt</code></pre>
+                    </div>
+
+                    <h3>6.2. Çıktı Dosyaları</h3>
+                    
+                    <div class="output-grid">
+                        <div class="output-card">
+                            <h4>📄 docking_result.pdbqt</h4>
+                            <p>Docking pozları (num_modes kadar)</p>
+                            <pre><code class="language-text">MODEL 1
+REMARK VINA RESULT:    -8.7      0.000      0.000
+... (atom koordinatları)
+ENDMDL
+MODEL 2
+REMARK VINA RESULT:    -8.3      2.154      3.210
+...</code></pre>
+                        </div>
+                        
+                        <div class="output-card">
+                            <h4>📊 Terminal Çıktısı</h4>
+                            <p>Scoring tablosu</p>
+                            <pre><code class="language-text">mode |   affinity | dist from best mode
+     | (kcal/mol) | rmsd l.b.| rmsd u.b.
+-----+------------+----------+----------
+   1       -8.7          0.000      0.000
+   2       -8.3          2.154      3.210
+   3       -8.1          2.577      4.891
+   4       -7.9          3.128      5.632</code></pre>
+                        </div>
+                    </div>
+
+                    <h3>6.3. Sonuçları Anlama</h3>
+                    
+                    <div class="result-explain">
+                        <div class="explain-item">
+                            <h5>affinity (kcal/mol)</h5>
+                            <p>Tahmini serbest enerji (ΔG). <strong>Daha negatif = daha güçlü bağlanma</strong></p>
+                            <ul>
+                                <li>&lt; -10: Çok güçlü</li>
+                                <li>-7 to -10: İyi</li>
+                                <li>-5 to -7: Orta</li>
+                                <li>&gt; -5: Zayıf</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="explain-item">
+                            <h5>RMSD l.b. (lower bound)</h5>
+                            <p>En iyi moddan minimum RMSD</p>
+                            <p>Düşük RMSD = benzer binding mode</p>
+                        </div>
+                        
+                        <div class="explain-item">
+                            <h5>RMSD u.b. (upper bound)</h5>
+                            <p>En iyi moddan maksimum RMSD</p>
+                            <p>Farklı binding orientation'ı gösterir</p>
+                        </div>
+                    </div>
+
+                    <div class="info-box warning">
+                        <h4>⚠️ Önemli Notlar</h4>
+                        <ul>
+                            <li><strong>Vina skorları görecelidir:</strong> Sadece aynı protein için karşılaştırın</li>
+                            <li><strong>En düşük enerji ≠ en iyi poz:</strong> Mutlaka görsel validasyon yapın</li>
+                            <li><strong>Clustering otomatik:</strong> Vina, benzer pozları otomatik gruplar</li>
+                            <li><strong>Exhaustiveness:</strong> Daha yüksek değer genellikle daha iyi sonuç verir</li>
+                        </ul>
+                    </div>
+
+                    <h3>6.4. Batch Docking</h3>
+                    
+                    <h4>Çoklu Ligand Docking</h4>
+                    <pre><code class="language-bash">#!/bin/bash
+# batch_docking.sh
+
+RECEPTOR="protein.pdbqt"
+CONFIG="config.txt"
+
+for ligand in ligands/*.pdbqt; do
+    name=$(basename "$ligand" .pdbqt)
+    echo "Docking: $name"
+    
+    vina --config $CONFIG \
+         --receptor $RECEPTOR \
+         --ligand "$ligand" \
+         --out "results/${name}_out.pdbqt" \
+         --log "logs/${name}.log"
+done
+
+echo "Tüm docking işlemleri tamamlandı!"</code></pre>
+
+                    <h4>Paralel Docking (GNU Parallel)</h4>
+                    <pre><code class="language-bash"># GNU Parallel kurulu olmalı
+# Tüm ligandları paralel dock et
+
+ls ligands/*.pdbqt | parallel -j 4 \
+    "vina --config config.txt \
+          --receptor protein.pdbqt \
+          --ligand {} \
+          --out results/{/.}_out.pdbqt"</code></pre>
+
+                    <h3>6.5. Log Dosyası Kaydetme</h3>
+                    <pre><code class="language-bash"># Log dosyasını ayrı kaydet
+vina --config config.txt --log docking.log
+
+# Veya hem ekrana hem dosyaya
+vina --config config.txt 2>&1 | tee docking.log</code></pre>
+
+                    <div class="performance-box">
+                        <h4>⚡ Performans İpuçları</h4>
+                        <div class="grid-2">
+                            <div>
+                                <h5>Hızlandırma:</h5>
+                                <ul>
+                                    <li>exhaustiveness azalt (4-6)</li>
+                                    <li>Daha az core kullan</li>
+                                    <li>Box boyutunu küçült</li>
+                                    <li>num_modes azalt</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h5>Hassasiyet Artırma:</h5>
+                                <ul>
+                                    <li>exhaustiveness artır (16-32)</li>
+                                    <li>Tüm CPU core'ları kullan</li>
+                                    <li>Birden fazla run yap</li>
+                                    <li>num_modes artır (20)</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Analiz -->
+            <section id="analiz" class="section">
+                <div class="section-header">
+                    <span class="section-number">07</span>
+                    <h2>Sonuç Analizi</h2>
+                </div>
+                <div class="content-block">
+                    <p class="lead">Docking sonuçlarını görselleştirme, enerji analizi ve etkileşim incelemesi.</p>
+                    
+                    <h3>7.1. PyMOL ile Görselleştirme</h3>
+                    
+                    <pre><code class="language-python"># PyMOL'de
+load protein.pdb
+load docking_result.pdbqt
+
+# Pozları ayır
+split_states docking_result
+
+# En iyi pozu göster
+hide everything
+show cartoon, protein
+show sticks, docking_result_0001
+color green, docking_result_0001
+
+# Etkileşimleri göster
+distance hbonds, docking_result_0001, protein, 3.5
+set dash_color, yellow
+
+# Yüzeyi göster
+show surface, protein
+set transparency, 0.5</code></pre>
+
+                    <h4>Batch Görselleştirme Script</h4>
+                    <pre><code class="language-python">#!/usr/bin/env python3
+"""PyMOL ile otomatik görselleştirme"""
+import pymol
+from pymol import cmd
+
+def visualize_docking(protein, docking_result, mode=1):
+    cmd.load(protein, "protein")
+    cmd.load(docking_result, "ligand")
+    
+    # Modeli seç
+    cmd.split_states("ligand")
+    ligand_name = f"ligand_{mode:04d}"
+    
+    # Stil ayarları
+    cmd.hide("everything")
+    cmd.show("cartoon", "protein")
+    cmd.color("cyan", "protein")
+    cmd.show("sticks", ligand_name)
+    cmd.color("green", ligand_name)
+    cmd.util.cbag(ligand_name)
+    
+    # H-bağları
+    cmd.distance("hbonds", ligand_name, "protein", 3.5)
+    cmd.set("dash_color", "yellow")
+    cmd.set("dash_width", 2)
+    
+    # Kaydet
+    cmd.png(f"docking_mode_{mode}.png", width=1920, height=1080, dpi=300, ray=1)
+    print(f"Görsel kaydedildi: docking_mode_{mode}.png")
+
+# Kullanım
+visualize_docking("protein.pdb", "docking_result.pdbqt", mode=1)</code></pre>
+
+                    <h3>7.2. Etkileşim Analizi</h3>
+                    
+                    <h4>Yöntem 1: PyMOL ile Mesafe Ölçümü</h4>
+                    <pre><code class="language-python"># Hidrojen bağları (2.5-3.5 Å)
+distance hbonds, (ligand and acceptors), (protein and donors), 3.5
+
+# π-π stacking (3.5-4.5 Å)
+distance pi_pi, (ligand and resn PHE+TYR+TRP+HIS), \
+                (protein and resn PHE+TYR+TRP+HIS), 4.5
+
+# Hidrofobik kontaklar (<4 Å)
+select hydrophobic_protein, protein and resn ALA+VAL+LEU+ILE+MET+PHE+TRP+PRO
+select hydrophobic_ligand, ligand and (elem C and not neighbor elem N+O+S)
+distance hydrophobic, hydrophobic_ligand, hydrophobic_protein, 4.0</code></pre>
+
+                    <h4>Yöntem 2: PLIP (Protein-Ligand Interaction Profiler)</h4>
+                    <pre><code class="language-bash"># PLIP kurulum
+pip install plip
+
+# Web servis
+# https://plip-tool.biotec.tu-dresden.de/
+
+# Komut satırı
+plip -f complex.pdb -o interactions.txt
+
+# Python API
+from plip.structure.preparation import PDBComplex
+
+pdb = PDBComplex()
+pdb.load_pdb('complex.pdb')
+pdb.analyze()
+
+for ligand in pdb.ligands:
+    interactions = ligand.interactions
+    print(f"H-bonds: {len(interactions.hbonds)}")
+    print(f"Hydrophobic: {len(interactions.hydrophobic_contacts)}")</code></pre>
+
+                    <h4>Yöntem 3: Prolif (Python Library)</h4>
+                    <pre><code class="language-python">import prolif as plf
+import MDAnalysis as mda
+
+# Yükle
+u = mda.Universe("protein.pdb", "docking_result.pdbqt")
+protein = u.select_atoms("protein")
+ligand = u.select_atoms("resname LIG")
+
+# Etkileşim fingerprint
+fp = plf.Fingerprint()
+fp.run(u.trajectory, ligand, protein)
+
+# Dataframe'e çevir
+df = fp.to_dataframe()
+print(df)
+
+# Görselleştir
+fp.plot_barcode()</code></pre>
+
+                    <h3>7.3. Enerji Değerlendirmesi</h3>
+                    
+                    <pre><code class="language-python">#!/usr/bin/env python3
+"""Vina sonuçlarını parse et"""
+
+def parse_vina_output(pdbqt_file):
+    """PDBQT dosyasından enerjileri çıkar"""
+    energies = []
+    
+    with open(pdbqt_file) as f:
+        for line in f:
+            if line.startswith("REMARK VINA RESULT:"):
+                parts = line.split()
+                energy = float(parts[3])
+                rmsd_lb = float(parts[4])
+                rmsd_ub = float(parts[5])
+                energies.append({
+                    'energy': energy,
+                    'rmsd_lb': rmsd_lb,
+                    'rmsd_ub': rmsd_ub
+                })
+    
+    return energies
+
+# Kullanım
+results = parse_vina_output("docking_result.pdbqt")
+for i, res in enumerate(results, 1):
+    print(f"Mode {i}: {res['energy']:.1f} kcal/mol")</code></pre>
+
+                    <h4>Toplu Analiz</h4>
+                    <pre><code class="language-python">import pandas as pd
+import glob
+
+# Tüm sonuçları topla
+all_results = []
+
+for pdbqt in glob.glob("results/*_out.pdbqt"):
+    ligand_name = pdbqt.split('/')[-1].replace('_out.pdbqt', '')
+    energies = parse_vina_output(pdbqt)
+    
+    if energies:
+        all_results.append({
+            'ligand': ligand_name,
+            'best_energy': energies[0]['energy'],
+            'num_modes': len(energies)
+        })
+
+# DataFrame oluştur
+df = pd.DataFrame(all_results)
+df = df.sort_values('best_energy')
+
+# CSV'ye kaydet
+df.to_csv('docking_summary.csv', index=False)
+
+# En iyi 10
+print("En iyi 10 ligand:")
+print(df.head(10))</code></pre>
+
+                    <h3>7.4. Görsel Kalite Kontrolü</h3>
+                    
+                    <div class="qc-visual">
+                        <h4>✓ İyi Binding Pose:</h4>
+                        <ul class="check-list">
+                            <li>Polar atomlar polar kalıntılara yakın</li>
+                            <li>H-bağı geometrisi doğru (2.5-3.5 Å, 120-180°)</li>
+                            <li>Hidrofobik gruplar hidrofobik ceple temas ediyor</li>
+                            <li>Ligand binding pocket'e tam oturuyor</li>
+                            <li>Ciddi sterik çakışma yok</li>
+                            <li>Yüklü gruplar uygun yönelimde</li>
+                        </ul>
+                        
+                        <h4>✗ Şüpheli Pose:</h4>
+                        <ul class="cross-list">
+                            <li>Ligand pocket dışında</li>
+                            <li>Polar gruplar buried ve exposed</li>
+                            <li>Atom çakışmaları (< vdW yarıçapları)</li>
+                            <li>H-bağı geometrisi kötü</li>
+                            <li>Büyük boşluklar (unfilled pockets)</li>
+                            <li>Mantıksız konformasyonlar</li>
+                        </ul>
+                    </div>
+
+                    <div class="info-box warning">
+                        <h4>🔍 Kritik: Görsel Validasyon Zorunlu</h4>
+                        <p>Vina skoru tek başına yeterli değildir. Her zaman:</p>
+                        <ol>
+                            <li>En az ilk 3-5 modu görsel inceleyin</li>
+                            <li>Etkileşimleri PyMOL/PLIP ile doğrulayın</li>
+                            <li>Literatürle karşılaştırın (bilinen bağlayıcılar)</li>
+                            <li>Redocking ile protokolü validate edin</li>
+                        </ol>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Otomasyon -->
+            <section id="otomasyon" class="section">
+                <div class="section-header">
+                    <span class="section-number">08</span>
+                    <h2>Python ile Otomasyon</h2>
+                </div>
+                <div class="content-block">
+                    <p class="lead">Vina'nın Python API'si ile büyük ölçekli virtual screening ve otomatik pipeline'lar.</p>
+                    
+                    <h3>8.1. Vina Python API</h3>
+                    
+                    <pre><code class="language-bash"># Kurulum
+pip install vina</code></pre>
+
+                    <h4>Temel Kullanım</h4>
+                    <pre><code class="language-python">from vina import Vina
+
+# Vina nesnesi oluştur
+v = Vina(sf_name='vina')
+
+# Receptor yükle
+v.set_receptor('protein.pdbqt')
+
+# Ligand yükle
+v.set_ligand_from_file('ligand.pdbqt')
+
+# Grid box ayarla
+v.compute_vina_maps(center=[15.19, 53.90, 16.92], box_size=[22, 22, 22])
+
+# Docking yap
+v.dock(exhaustiveness=8, n_poses=9)
+
+# Sonuçları kaydet
+v.write_poses('docking_out.pdbqt', n_poses=9, overwrite=True)
+
+# Enerjileri al
+energies = v.energies()
+print("En iyi enerji:", energies[0][0], "kcal/mol")</code></pre>
+
+                    <h3>8.2. Batch Virtual Screening</h3>
+                    
+                    <pre><code class="language-python">#!/usr/bin/env python3
+"""
+Otomatik virtual screening pipeline
+"""
+from vina import Vina
+import glob
+import pandas as pd
+from pathlib import Path
+
+class VirtualScreening:
+    def __init__(self, receptor, center, box_size):
+        self.receptor = receptor
+        self.center = center
+        self.box_size = box_size
+        self.results = []
+        
+    def screen_library(self, ligand_dir, exhaustiveness=8):
+        """Ligand kütüphanesini tara"""
+        
+        # Vina setup
+        v = Vina(sf_name='vina', cpu=0)  # Tüm CPU'lar
+        v.set_receptor(self.receptor)
+        v.compute_vina_maps(center=self.center, box_size=self.box_size)
+        
+        # Tüm ligandlar
+        ligands = glob.glob(f"{ligand_dir}/*.pdbqt")
+        total = len(ligands)
+        
+        print(f"Taranacak ligand sayısı: {total}")
+        
+        for i, ligand_path in enumerate(ligands, 1):
+            ligand_name = Path(ligand_path).stem
+            print(f"[{i}/{total}] Docking: {ligand_name}")
+            
+            try:
+                # Docking
+                v.set_ligand_from_file(ligand_path)
+                v.dock(exhaustiveness=exhaustiveness, n_poses=1)
+                
+                # En iyi enerji
+                energy = v.energies()[0][0]
+                
+                # Kaydet
+                output_file = f"results/{ligand_name}_out.pdbqt"
+                v.write_poses(output_file, n_poses=1, overwrite=True)
+                
+                self.results.append({
+                    'ligand': ligand_name,
+                    'energy': energy,
+                    'output': output_file
+                })
+                
+            except Exception as e:
+                print(f"  HATA: {ligand_name} - {e}")
+                continue
+        
+        print("Tarama tamamlandı!")
+        
+    def save_results(self, output_file="screening_results.csv"):
+        """Sonuçları CSV'ye kaydet"""
+        df = pd.DataFrame(self.results)
+        df = df.sort_values('energy')
+        df.to_csv(output_file, index=False)
+        print(f"Sonuçlar kaydedildi: {output_file}")
+        
+        # Özet
+        print(f"\nÖzet:")
+        print(f"Toplam docking: {len(df)}")
+        print(f"En iyi enerji: {df['energy'].min():.2f} kcal/mol")
+        print(f"Ortalama enerji: {df['energy'].mean():.2f} kcal/mol")
+        
+        return df
+
+# KULLANIM
+if __name__ == "__main__":
+    # Parametreler
+    receptor = "protein.pdbqt"
+    center = [15.19, 53.90, 16.92]
+    box_size = [22, 22, 22]
+    ligand_library = "ligand_library"
+    
+    # Virtual screening
+    vs = VirtualScreening(receptor, center, box_size)
+    vs.screen_library(ligand_library, exhaustiveness=8)
+    results = vs.save_results()
+    
+    # En iyi 20'yi göster
+    print("\nEn iyi 20 ligand:")
+    print(results.head(20))</code></pre>
+
+                    <h3>8.3. Paralel Processing</h3>
+                    
+                    <pre><code class="language-python">from concurrent.futures import ProcessPoolExecutor
+from vina import Vina
+
+def dock_single_ligand(args):
+    """Tek bir ligand için docking"""
+    receptor, ligand, center, box_size = args
+    
+    v = Vina(sf_name='vina', cpu=1)  # Her worker 1 CPU
+    v.set_receptor(receptor)
+    v.compute_vina_maps(center=center, box_size=box_size)
+    v.set_ligand_from_file(ligand)
+    v.dock(exhaustiveness=8, n_poses=1)
+    
+    energy = v.energies()[0][0]
+    output = ligand.replace('.pdbqt', '_out.pdbqt')
+    v.write_poses(output, n_poses=1, overwrite=True)
+    
+    return {
+        'ligand': ligand,
+        'energy': energy,
+        'output': output
+    }
+
+# Paralel çalıştırma
+receptor = "protein.pdbqt"
+center = [15.19, 53.90, 16.92]
+box_size = [22, 22, 22]
+ligands = glob.glob("ligands/*.pdbqt")
+
+# Worker pool oluştur (16 paralel iş)
+with ProcessPoolExecutor(max_workers=16) as executor:
+    args = [(receptor, lig, center, box_size) for lig in ligands]
+    results = list(executor.map(dock_single_ligand, args))
+
+# Sonuçları işle
+df = pd.DataFrame(results)
+df = df.sort_values('energy')
+df.to_csv('parallel_results.csv', index=False)</code></pre>
+
+                    <h3>8.4. Redocking Validation Script</h3>
+                    
+                    <pre><code class="language-python">#!/usr/bin/env python3
+"""
+Otomatik redocking validasyonu
+"""
+from vina import Vina
+from pymol import cmd
+import numpy as np
+
+def calculate_rmsd(ref_pdb, docked_pdbqt):
+    """PyMOL ile RMSD hesapla"""
+    cmd.load(ref_pdb, 'reference')
+    cmd.load(docked_pdbqt, 'docked')
+    
+    # İlk modeli al
+    cmd.split_states('docked')
+    
+    # RMSD hesapla
+    rmsd = cmd.align('docked_0001', 'reference')[0]
+    
+    cmd.delete('all')
+    return rmsd
+
+def redocking_validation(protein, crystal_ligand, center, box_size):
+    """Redocking protokolü"""
+    
+    print("=== Redocking Validasyonu ===\n")
+    
+    # 1. Crystal ligandı hazırla (zaten PDBQT formatında olmalı)
+    print("1. Crystal ligand hazırlandı")
+    
+    # 2. Docking yap
+    print("2. Docking başlatıldı...")
+    v = Vina(sf_name='vina', cpu=0)
+    v.set_receptor(protein)
+    v.set_ligand_from_file(crystal_ligand)
+    v.compute_vina_maps(center=center, box_size=box_size)
+    v.dock(exhaustiveness=16, n_poses=9)
+    
+    # 3. Sonuçları kaydet
+    v.write_poses('redocking_result.pdbqt', n_poses=9, overwrite=True)
+    energies = v.energies()
+    print(f"   En iyi enerji: {energies[0][0]:.2f} kcal/mol")
+    
+    # 4. RMSD hesapla
+    print("3. RMSD hesaplanıyor...")
+    rmsd = calculate_rmsd(crystal_ligand, 'redocking_result.pdbqt')
+    
+    # 5. Sonuç
+    print(f"\n=== SONUÇ ===")
+    print(f"RMSD: {rmsd:.2f} Å")
+    
+    if rmsd < 2.0:
+        print("✅ MÜKEMMEL - Protokol valide edildi")
+    elif rmsd < 3.0:
+        print("⚠️  KABUL EDİLEBİLİR - Protokol makul")
+    else:
+        print("❌ KABUL EDİLEMEZ - Parametreleri kontrol edin")
+    
+    return rmsd, energies[0][0]
+
+# Kullanım
+protein = "protein.pdbqt"
+crystal_ligand = "crystal_ligand.pdbqt"
+center = [15.19, 53.90, 16.92]  # Crystal ligand merkezi
+box_size = [22, 22, 22]
+
+rmsd, energy = redocking_validation(protein, crystal_ligand, center, box_size)</code></pre>
+
+                    <div class="info-box success">
+                        <h4>💡 Python API Avantajları</h4>
+                        <ul>
+                            <li>Komut satırından çok daha hızlı (setup overhead yok)</li>
+                            <li>Kolay paralel processing</li>
+                            <li>Otomatik pipeline kurulumu</li>
+                            <li>RDKit, Biopython ile entegrasyon</li>
+                            <li>Makine öğrenmesi modelleriyle kombine edilebilir</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Best Practices -->
+            <section id="best-practices" class="section">
+                <div class="section-header">
+                    <span class="section-number">09</span>
+                    <h2>Best Practices & İpuçları</h2>
+                </div>
+                <div class="content-block">
+                    <p class="lead">Güvenilir ve yayınlanabilir Vina sonuçları için öneriler.</p>
+                    
+                    <h3>9.1. Protokol Optimizasyonu</h3>
+                    
+                    <div class="best-practice-grid">
+                        <div class="practice-card">
+                            <h4>🎯 Grid Box</h4>
+                            <ul class="check-list">
+                                <li>Ko-kristalize ligand merkezini kullan</li>
+                                <li>Box, ligandın tüm konformasyonlarını kapsasın</li>
+                                <li>Blind docking için daha büyük box (30×30×30)</li>
+                                <li>PyMOL ile görsel doğrulama yap</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="practice-card">
+                            <h4>⚙️ Parametreler</h4>
+                            <ul class="check-list">
+                                <li>exhaustiveness ≥ 8 (standart)</li>
+                                <li>Kritik çalışmalar: exhaustiveness = 16-32</li>
+                                <li>num_modes = 9-20 (alternatif modlar için)</li>
+                                <li>Tüm CPU core'ları kullan</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="practice-card">
+                            <h4>🧪 Validasyon</h4>
+                            <ul class="check-list">
+                                <li>Redocking RMSD < 2.0 Å zorunlu</li>
+                                <li>Birden fazla crystal yapı ile test et</li>
+                                <li>Known active/inactive moleküllerle</li>
+                                <li>Cross-docking (farklı protein konformasyonları)</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="practice-card">
+                            <h4>📊 Analiz</h4>
+                            <ul class="check-list">
+                                <li>İlk 3-5 modu görsel incele</li>
+                                <li>Etkileşimleri PLIP/Prolif ile analiz et</li>
+                                <li>Literatürle karşılaştır</li>
+                                <li>Consensus scoring kullan</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <h3>9.2. Yaygın Hatalar</h3>
+                    
+                    <div class="mistakes-grid">
+                        <div class="mistake-card error">
+                            <h4>❌ Sadece En Düşük Enerji</h4>
+                            <p><strong>Neden Yanlış:</strong> En düşük scoring ≠ biyolojik olarak doğru</p>
+                            <p><strong>Doğrusu:</strong> İlk 5 modu incele, etkileşimlere bak</p>
+                        </div>
+                        
+                        <div class="mistake-card error">
+                            <h4>❌ Görsel Validasyon Yok</h4>
+                            <p><strong>Neden Yanlış:</strong> Skorlar yanıltıcı olabilir</p>
+                            <p><strong>Doğrusu:</strong> PyMOL'de her zaman görsel kontrol</p>
+                        </div>
+                        
+                        <div class="mistake-card error">
+                            <h4>❌ Redocking Yapmama</h4>
+                            <p><strong>Neden Yanlış:</strong> Protokol güvenilirliği bilinmiyor</p>
+                            <p><strong>Doğrusu:</strong> Mutlaka bilinen yapıyla validate et</p>
+                        </div>
+                        
+                        <div class="mistake-card error">
+                            <h4>❌ Küçük Box</h4>
+                            <p><strong>Neden Yanlış:</strong> Alternatif binding modları keşfedilmez</p>
+                            <p><strong>Doğrusu:</strong> Ligand + 10-15 Å marj bırak</p>
+                        </div>
+                        
+                        <div class="mistake-card error">
+                            <h4>❌ Düşük Exhaustiveness</h4>
+                            <p><strong>Neden Yanlış:</strong> Yetersiz sampling, tutarsız sonuçlar</p>
+                            <p><strong>Doğrusu:</strong> Minimum 8, yayın için 16+</p>
+                        </div>
+                        
+                        <div class="mistake-card error">
+                            <h4>❌ Protonasyon İhmal</h4>
+                            <p><strong>Neden Yanlış:</strong> Yanlış yükler, kötü skorlar</p>
+                            <p><strong>Doğrusu:</strong> PROPKA/H++ ile pH 7.4'te protonate et</p>
+                        </div>
+                    </div>
+
+                    <h3>9.3. Yayın İçin Checklist</h3>
+                    
+                    <div class="publication-checklist">
+                        <h4>📝 Metodoloji Bölümünde Belirtilmeli:</h4>
+                        <ul class="checklist">
+                            <li>AutoDock Vina versiyonu (örn: 1.2.5)</li>
+                            <li>PDBQT hazırlama araçları (MGLTools, Meeko, vb.)</li>
+                            <li>Protein hazırlama detayları (su, H+, yükler)</li>
+                            <li>Protonasyon durumu belirleme yöntemi</li>
+                            <li>Grid box koordinatları ve boyutu</li>
+                            <li>exhaustiveness değeri</li>
+                            <li>Enerji minimizasyon protokolü (ligand)</li>
+                            <li>Redocking RMSD değeri</li>
+                        </ul>
+                        
+                        <h4>📊 Sonuçlar Bölümünde Gösterilmeli:</h4>
+                        <ul class="checklist">
+                            <li>Binding affinity (kcal/mol)</li>
+                            <li>Alternatif binding modları</li>
+                            <li>2D ligand etkileşim diagramı</li>
+                            <li>3D PyMOL görselleri</li>
+                            <li>H-bağları ve mesafeleri</li>
+                            <li>Kritik amino asit etkileşimleri</li>
+                            <li>Redocking validasyon sonuçları</li>
+                        </ul>
+                        
+                        <h4>📁 Supplementary Material:</h4>
+                        <ul class="checklist">
+                            <li>Config dosyası (config.txt)</li>
+                            <li>Hazırlanmış yapılar (PDBQT)</li>
+                            <li>Docking sonuçları (tüm modlar)</li>
+                            <li>Görselleştirme scriptleri</li>
+                            <li>Batch processing kodları (varsa)</li>
+                        </ul>
+                    </div>
+
+                    <h3>9.4. Troubleshooting</h3>
+                    
+                    <div class="troubleshoot-grid">
+                        <div class="trouble-card">
+                            <h4>🔴 Problem: "Cannot find atom type"</h4>
+                            <p><strong>Neden:</strong> PDBQT'de tanımsız atom tipi</p>
+                            <p><strong>Çözüm:</strong></p>
+                            <ul>
+                                <li>Meeko veya MGLTools ile yeniden hazırla</li>
+                                <li>Nadir elementleri kontrol et (Si, B, vb.)</li>
+                                <li>PDBQT dosyasını manuel düzenle</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="trouble-card">
+                            <h4>🟡 Problem: Tutarsız sonuçlar</h4>
+                            <p><strong>Neden:</strong> Yetersiz sampling</p>
+                            <p><strong>Çözüm:</strong></p>
+                            <ul>
+                                <li>exhaustiveness artır (16-32)</li>
+                                <li>Seed ayarla (reproducibility)</li>
+                                <li>Birden fazla run yap</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="trouble-card">
+                            <h4>🔵 Problem: Ligand binding site dışında</h4>
+                            <p><strong>Neden:</strong> Box çok büyük veya yanlış yer</p>
+                            <p><strong>Çözüm:</strong></p>
+                            <ul>
+                                <li>Box merkezini kontrol et</li>
+                                <li>Box boyutunu küçült</li>
+                                <li>Ko-kristalize ligand kullan</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="trouble-card">
+                            <h4>🟢 Problem: Çok yavaş</h4>
+                            <p><strong>Neden:</strong> Büyük box veya çok torsiyon</p>
+                            <p><strong>Çözüm:</strong></p>
+                            <ul>
+                                <li>Box boyutunu optimize et</li>
+                                <li>Ligand torsiyonları azalt</li>
+                                <li>Paralel processing kullan</li>
+                                <li>GPU versiyonu dene (AutoDock-GPU)</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <h3>9.5. Consensus Scoring</h3>
+                    <p>Tek scoring function'a güvenme! Birden fazla yöntem kullan:</p>
+                    
+                    <pre><code class="language-bash"># 1. AutoDock Vina
+vina --config config.txt --out vina_out.pdbqt
+
+# 2. Smina (Vina fork, daha fazla scoring)
+smina --config config.txt \
+      --scoring vina \
+      --out smina_out.pdbqt
+
+# 3. rDock (open-source)
+rbdock -i ligand.sdf -r cavity.prm -p dock.prm -n 50 -o rdock_out
+
+# 4. LeDock (ücretsiz)
+ledock config.in</code></pre>
+
+                    <div class="info-box success">
+                        <h4>🏆 Altın Standart Workflow</h4>
+                        <ol>
+                            <li><strong>Hazırlık:</strong> PROPKA/H++ ile protonasyon optimize et</li>
+                            <li><strong>Validasyon:</strong> Redocking RMSD < 2.0 Å sağla</li>
+                            <li><strong>Docking:</strong> exhaustiveness ≥ 16 kullan</li>
+                            <li><strong>Analiz:</strong> İlk 5 modu görsel incele</li>
+                            <li><strong>Etkileşim:</strong> PLIP/Prolif ile detaylı analiz</li>
+                            <li><strong>Konsensus:</strong> 2-3 farklı scoring ile doğrula</li>
+                            <li><strong>Deneysel:</strong> Mümkünse biyokimyasal test yap</li>
+                        </ol>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Footer -->
+            <footer class="footer">
+                <div class="footer-content">
+                    <div class="footer-section">
+                        <h3>AutoDock Vina Rehberi</h3>
+                        <p>Modern, hızlı ve kullanımı kolay moleküler docking protokolü</p>
+                    </div>
+                    <div class="footer-section">
+                        <h4>Kaynaklar</h4>
+                        <ul>
+                            <li><a href="https://vina.scripps.edu/" target="_blank">AutoDock Vina Resmi Site</a></li>
+                            <li><a href="https://github.com/ccsb-scripps/AutoDock-Vina" target="_blank">GitHub Repository</a></li>
+                            <li><a href="https://pubs.acs.org/doi/10.1021/acs.jcim.1c00203" target="_blank">Vina 1.2.0 Paper</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-section">
+                        <h4>Referans</h4>
+                        <p class="citation">Eberhardt, J., Santos-Martins, D., Tillack, A. F., & Forli, S. (2021). AutoDock Vina 1.2.0: New Docking Methods, Expanded Force Field, and Python Bindings. <em>Journal of Chemical Information and Modeling</em>, 61(8), 3891-3898.</p>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <p>Bu rehber araştırma ve eğitim amaçlıdır. En güncel bilgiler için resmi dokümantasyonu kontrol edin.</p>
+                    <p>© 2024 AutoDock Vina Tutorial | Açık Kaynak Topluluk Kaynağı</p>
+                </div>
+            </footer>
+        </div>
+    </main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-powershell.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
