@@ -49,6 +49,12 @@
     box-sizing: border-box;
 }
 
+html,
+body {
+    overflow-x: hidden;
+    max-width: 100%;
+}
+
 html {
     scroll-behavior: smooth;
     scroll-padding-top: 80px;
@@ -393,10 +399,12 @@ code {
     color: var(--primary);
 }
 
-pre {
+pre,
+pre[class*="language-"] {
     background: #1e1b4b;
     border-radius: 10px;
     padding: 1.5rem;
+    max-width: 100%;
     overflow-x: auto;
     margin: 1.5rem 0;
     border: 2px solid rgba(124, 58, 237, 0.2);
@@ -707,6 +715,8 @@ pre code {
 
 .step-content {
     flex: 1;
+    min-width: 0;
+    max-width: 100%;
 }
 
 .step-content h4 {
@@ -1135,7 +1145,40 @@ tbody tr:hover {
    RESPONSIVE
    ======================================== */
 
+.comparison-card,
+.install-option,
+.tool-card,
+.param-card,
+.output-card,
+.explain-item,
+.practice-card,
+.mistake-card,
+.trouble-card,
+.step-box,
+.method-content,
+.terminal-box,
+.info-box,
+.checklist-box,
+.performance-box,
+.publication-checklist,
+.qc-visual,
+.content-block,
+.grid-2 > * {
+    min-width: 0;
+    max-width: 100%;
+}
+
+@media (hover: none) {
+    .copy-btn {
+        opacity: 1 !important;
+    }
+}
+
 @media (max-width: 768px) {
+    .container {
+        padding: 0 1.25rem;
+    }
+
     .section-header {
         flex-direction: column;
         align-items: flex-start;
@@ -1165,12 +1208,25 @@ tbody tr:hover {
     .comparison-grid,
     .grid-2,
     .install-tabs,
-    .tool-grid {
-        grid-template-columns: 1fr;
+    .tool-grid,
+    .param-grid,
+    .output-grid,
+    .result-explain,
+    .best-practice-grid,
+    .mistakes-grid,
+    .troubleshoot-grid,
+    .footer-content {
+        grid-template-columns: minmax(0, 1fr);
     }
     
     .step-box {
         flex-direction: column;
+    }
+
+    table {
+        display: block;
+        max-width: 100%;
+        overflow-x: auto;
     }
 }
 
