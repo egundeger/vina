@@ -23,14 +23,21 @@ const sections = document.querySelectorAll('.section');
 const navLinks = document.querySelectorAll('.nav-link');
 
 const observerOptions = {
-    threshold: 0.3,
+    threshold: 0,
     rootMargin: '-100px 0px -50% 0px'
 };
+
+if (sections.length > 0) {
+    sections[0].classList.add('visible');
+}
 
 const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
             const id = entry.target.getAttribute('id');
+            
+            sections.forEach(section => section.classList.remove('visible'));
+            entry.target.classList.add('visible');
             
             navLinks.forEach(link => {
                 link.classList.remove('active');
